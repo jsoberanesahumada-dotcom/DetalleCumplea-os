@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="book-container">
+        <div class="book" id="book">
+            
+            <div class="page cover active" id="p1">
+                <div class="front">
+                    <h1>¡Feliz Cumpleaños!</h1>
+                    <p>Un pequeño detalle para alguien muy especial...</p>
+                    <span class="tap-instruction">Toca para abrir 📖</span>
+                </div>
+                <div class="back">
+                    <h2>Nuestra Historia</h2>
+                    <p>Aquí puedes empezar a escribir tu dedicatoria. Este espacio es ideal para recordar cómo empezó todo o poner una linda frase de introducción.</p>
+                </div>
+            </div>
+
+            <div class="page" id="p2">
+                <div class="front">
+                    <h2>Momentos Especiales</h2>
+                    <p>Escribe aquí tus recuerdos favoritos, anécdotas divertidas o momentos que hayan compartido juntos durante este año.</p>
+                </div>
+                <div class="back">
+                    <h2>Mis Deseos para Ti</h2>
+                    <p>Dedícale tus mejores deseos para este nuevo año de vida: salud, éxito, risas y que todos sus proyectos se cumplan.</p>
+                </div>
+            </div>
+
+            <div class="page" id="p3">
+                <div class="front">
+                    <h2>Una última sorpresa...</h2>
+                    <p>Espero que este pequeño detalle te haya sacado una sonrisa. ¡Te quiero muchísimo!</p>
+                    <span class="tap-instruction">Toca para cerrar el libro y escuchar 🎶</span>
+                </div>
+                <div class="back contraportada">
+                    <h2>¡Disfruta tu día!</h2>
+                    <p>Dale play para escuchar tu canción de fondo:</p>
+                    
+                    <div class="audio-container">
+                        <audio id="birthday-song" controls>
+                            <source src="No Importa Qué (feat. Jorge Bringas & Stefany Villaroel).mp3" type="audio/mpeg">
+                            Tu navegador no soporta el elemento de audio.
+                        </audio>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="nav-buttons">
+        <button id="prev-btn" disabled>Atrás</button>
+        <button id="next-btn">Siguiente</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
