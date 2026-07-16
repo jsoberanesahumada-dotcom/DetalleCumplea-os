@@ -5,7 +5,7 @@
 }
 
 body {
-    background: radial-gradient(circle, #ffe3e3 0%, #fbd5d5 100%);
+    background: radial-gradient(circle, #7eee68 0%, #75eb6b 100%);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     flex-direction: column;
@@ -15,25 +15,23 @@ body {
     overflow: hidden;
 }
 
-/* --- CONTENEDOR PRINCIPAL RESPONSIVO --- */
+/* Contenedor principal adaptable */
 .book-container {
     width: 90%;
-    max-width: 400px; /* Tamaño ideal para que en celular o PC simule una página completa */
+    max-width: 400px;
     height: 60vh;
     max-height: 500px;
-    perspective: 1500px; 
+    perspective: 1500px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* El Libro */
 .book {
     position: relative;
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
-    transition: transform 0.5s;
 }
 
 /* Estilo general de las Páginas */
@@ -44,27 +42,30 @@ body {
     top: 0;
     left: 0;
     transform-style: preserve-3d;
-    /* En móviles el giro es al centro para simular cambio de tarjeta/página completa */
-    transform-origin: center center; 
-    transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-    pointer-events: none; 
+    transform-origin: center center;
+    transition: transform 0.6s ease-in-out, opacity 0.4s ease-in-out;
+    
+    /* Ocultamos por defecto para evitar que se encimen en móviles */
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+    pointer-events: none;
 }
 
-/* Prioridad de Capas inicial */
-#p1 { z-index: 3; }
-#p2 { z-index: 2; }
-#p3 { z-index: 1; }
-
+/* Solo la página visible se activa */
 .page.active {
-    pointer-events: auto; 
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+    pointer-events: auto;
 }
 
-/* Cara Delantera y Trasera */
+/* Hojas del libro (Frente y Vuelta) */
 .front, .back {
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden; 
+    backface-visibility: hidden;
     padding: 25px;
     display: flex;
     flex-direction: column;
@@ -75,13 +76,12 @@ body {
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* Estilo de Papel */
+/* Diseño imitación papel */
 .front {
     background-color: #fdfbf7;
     background-image: linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
     background-size: 100% 2em;
     color: #4a3b32;
-    z-index: 2;
     transform: rotateY(0deg);
 }
 
@@ -91,18 +91,6 @@ body {
     transform: rotateY(180deg);
 }
 
-/* Diseños de Portadas */
-.cover.front {
-    background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
-    color: white;
-}
-
-.contraportada {
-    background: linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%) !important;
-    color: white !important;
-}
-
-/* Textos adaptables */
 h1 {
     font-size: 1.8rem;
     margin-bottom: 12px;
@@ -129,7 +117,7 @@ p {
     animation: bounce 2s infinite;
 }
 
-/* Contenedor de música */
+/* Caja de audio */
 .audio-container {
     margin-top: 15px;
     width: 100%;
@@ -139,7 +127,12 @@ audio {
     width: 100%;
 }
 
-/* Botones de navegación */
+/* Fuerza a que los controles de audio siempre respondan al clic */
+.audio-container, audio {
+    pointer-events: auto !important;
+}
+
+/* Botones de navegación abajo */
 .nav-buttons {
     margin-top: 25px;
     display: flex;
@@ -148,7 +141,7 @@ audio {
 }
 
 button {
-    background-color: #ff758c;
+    background-color: #0d5a19;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -168,22 +161,20 @@ button:disabled {
     cursor: not-allowed;
 }
 
-/* Animación de rebote */
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
     40% { transform: translateY(-8px); }
     60% { transform: translateY(-4px); }
 }
 
-/* Efecto Flip al pasar página */
 .flipped {
     transform: rotateY(-180deg);
 }
 
-/* --- AJUSTES PARA PANTALLAS GRANDES (PC / TABLETS HORIZONTALES) --- */
+/* Ajuste visual en pantallas más grandes */
 @media (min-width: 768px) {
     .book-container {
-        max-width: 700px; /* Más ancho en PC para dar espacio si es necesario */
+        max-width: 700px;
     }
     h1 { font-size: 2.2rem; }
     h2 { font-size: 1.6rem; }
