@@ -15,13 +15,13 @@ body {
     overflow: hidden;
 }
 
-/* Contenedor del Libro */
+/* --- CONTENEDOR PRINCIPAL RESPONSIVO --- */
 .book-container {
     width: 90%;
-    max-width: 420px;
-    height: 65vh;
-    max-height: 550px;
-    perspective: 1500px; /* Efecto de profundidad 3D */
+    max-width: 400px; /* Tamaño ideal para que en celular o PC simule una página completa */
+    height: 60vh;
+    max-height: 500px;
+    perspective: 1500px; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,42 +44,41 @@ body {
     top: 0;
     left: 0;
     transform-style: preserve-3d;
-    transform-origin: left center;
+    /* En móviles el giro es al centro para simular cambio de tarjeta/página completa */
+    transform-origin: center center; 
     transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-    pointer-events: none; /* Desactivado por defecto */
+    pointer-events: none; 
 }
 
-/* --- SOLUCIÓN DE CAPAS (z-index) --- 
-   Asignamos la prioridad de visibilidad inicial:
-   Página 1 arriba, Página 2 en medio, Página 3 al fondo. */
+/* Prioridad de Capas inicial */
 #p1 { z-index: 3; }
 #p2 { z-index: 2; }
 #p3 { z-index: 1; }
 
 .page.active {
-    pointer-events: auto; /* Solo la página activa recibe clics */
+    pointer-events: auto; 
 }
 
-/* Cara Delantera y Trasera de cada página */
+/* Cara Delantera y Trasera */
 .front, .back {
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden; /* Oculta la cara opuesta al girar */
-    padding: 30px;
+    backface-visibility: hidden; 
+    padding: 25px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* Diseño imitación "Papel/Libro" */
+/* Estilo de Papel */
 .front {
     background-color: #fdfbf7;
-    background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
     background-size: 100% 2em;
     color: #4a3b32;
     z-index: 2;
@@ -92,7 +91,7 @@ body {
     transform: rotateY(180deg);
 }
 
-/* Estilo específico para Portada y Contraportada */
+/* Diseños de Portadas */
 .cover.front {
     background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
     color: white;
@@ -103,49 +102,48 @@ body {
     color: white !important;
 }
 
-/* Detalles de texto */
+/* Textos adaptables */
 h1 {
-    font-size: 2rem;
-    margin-bottom: 15px;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 h2 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
     font-family: Georgia, serif;
 }
 
 p {
     font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 15px;
+    line-height: 1.5;
+    margin-bottom: 12px;
 }
 
 .tap-instruction {
     font-size: 0.8rem;
     font-style: italic;
-    margin-top: 20px;
+    margin-top: 15px;
     opacity: 0.8;
     animation: bounce 2s infinite;
 }
 
-/* Reproductor de Audio */
+/* Contenedor de música */
 .audio-container {
-    margin-top: 20px;
+    margin-top: 15px;
     width: 100%;
 }
 
 audio {
     width: 100%;
-    outline: none;
 }
 
 /* Botones de navegación */
 .nav-buttons {
-    margin-top: 30px;
+    margin-top: 25px;
     display: flex;
-    gap: 20px;
+    gap: 15px;
     z-index: 10;
 }
 
@@ -153,9 +151,9 @@ button {
     background-color: #ff758c;
     color: white;
     border: none;
-    padding: 12px 24px;
-    font-size: 1rem;
-    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    border-radius: 20px;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: background 0.3s, transform 0.1s;
@@ -173,11 +171,21 @@ button:disabled {
 /* Animación de rebote */
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-10px); }
-    60% { transform: translateY(-5px); }
+    40% { transform: translateY(-8px); }
+    60% { transform: translateY(-4px); }
 }
 
-/* Clase que rota la página al pasarla */
+/* Efecto Flip al pasar página */
 .flipped {
     transform: rotateY(-180deg);
+}
+
+/* --- AJUSTES PARA PANTALLAS GRANDES (PC / TABLETS HORIZONTALES) --- */
+@media (min-width: 768px) {
+    .book-container {
+        max-width: 700px; /* Más ancho en PC para dar espacio si es necesario */
+    }
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.6rem; }
+    p { font-size: 1.05rem; }
 }
